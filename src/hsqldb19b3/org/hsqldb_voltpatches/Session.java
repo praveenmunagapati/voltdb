@@ -2090,6 +2090,9 @@ public class Session implements SessionInterface {
         if (id == null) {
             id = nextExpressionNodeId++;
             hsqlExpressionNodeIdsToVoltNodeIds.put(expr, id);
+        } else {
+            /* Shouldn't reach here */
+            System.out.println("Try to reuse a node Id...Sounds like a bug. expr " + expr.toString());
         }
         return id;
     }

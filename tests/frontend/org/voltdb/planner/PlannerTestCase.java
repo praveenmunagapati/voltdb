@@ -49,7 +49,7 @@ import junit.framework.TestCase;
 
 public class PlannerTestCase extends TestCase {
 
-    private PlannerTestAideDeCamp m_aide;
+    protected PlannerTestAideDeCamp m_aide;
     private boolean m_byDefaultInferPartitioning = true;
     private boolean m_byDefaultPlanForSinglePartition;
     final private int m_defaultParamCount = 0;
