@@ -345,7 +345,14 @@ public:
         const char* dataPtr = getDataPtr(columnInfo);
         const bool isInlined = columnInfo->inlined;
 
-        return NValue::initFromTupleStorage(dataPtr, columnType, isInlined);
+        try {
+            return NValue::initFromTupleStorage(dataPtr, columnType, isInlined);
+        } catch (SQLException &ex) {
+            std::string errorMsg = ex.message()
+                    + ", column info: " + columnInfo->debug()
+                    + ", tuple schema info: " + m_schema->debug();
+            throw SQLException(ex.getSqlState(), errorMsg);
+        }
     }
 
     /** Like the above method but for hidden columns. */
@@ -359,7 +366,14 @@ public:
         const char* dataPtr = getDataPtr(columnInfo);
         const bool isInlined = columnInfo->inlined;
 
-        return NValue::initFromTupleStorage(dataPtr, columnType, isInlined);
+        try {
+            return NValue::initFromTupleStorage(dataPtr, columnType, isInlined);
+        } catch (SQLException &ex) {
+            std::string errorMsg = ex.message()
+                    + ", column info: " + columnInfo->debug()
+                    + ", tuple schema info: " + m_schema->debug();
+            throw SQLException(ex.getSqlState(), errorMsg);
+        }
     }
 
     inline const voltdb::TupleSchema* getSchema() const {
